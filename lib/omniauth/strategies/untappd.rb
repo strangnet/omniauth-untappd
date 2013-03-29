@@ -16,9 +16,13 @@ module OmniAuth
 
       info do
         {
-            'uid' => raw_info['user']['id'],
-            'username' => raw_info['user']['user_name'],
-            'url' => raw_info['user']['untappd_url']
+            :id => raw_info['user']['id'],
+            :username => raw_info['user']['user_name'],
+            :name => "#{raw_info['user']['first_name']} #{raw_info['user']['last_name']}",
+            :urls => {
+                'website' => raw_info['user']['url'],
+                'untappd' => raw_info['user']['untappd_url']
+            }
         }
       end
 
