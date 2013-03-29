@@ -1,5 +1,7 @@
 # Omniauth::Untappd
 
+[![Build Status](https://travis-ci.org/strangnet/omniauth-untappd.png)](https://travis-ci.org/strangnet/omniauth-untappd)
+
 A Omniauth strategy for Untappd
 
 ## Installation
