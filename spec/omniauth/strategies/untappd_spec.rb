@@ -12,11 +12,19 @@ describe OmniAuth::Strategies::Untappd do
     end
 
     it 'should have correct site' do
-      expect(subject.options.client_options.site).to eq 'http://untappd.com'
+      expect(subject.options.client_options.site).to eq 'https://untappd.com'
     end
 
-    it 'should have correct authorize path' do
-      expect(subject.options.client_options.authorize_path).to eq '/oauth/authenticate'
+    it 'should have correct authorize url' do
+      expect(subject.options.client_options.authorize_url).to eq 'https://untappd.com/oauth/authenticate'
+    end
+
+    it 'should have correct request token url' do
+      expect(subject.options.client_options.request_token_url).to eq 'https://untappd.com/oauth/request_token'
+    end
+
+    it 'should have correct access token url' do
+      expect(subject.options.client_options.access_token_url).to eq 'https://untappd.com/oauth/access_token'
     end
   end
 end

@@ -7,10 +7,10 @@ module OmniAuth
       option :name, 'untappd'
 
       option :client_options, {
-          :site => 'http://untappd.com',
-          :authorize_url => 'http://untappd.com/oauth/authenticate',
-          :request_token_url => 'http://untappd.com/oauth/request_token',
-          :access_token_url => 'http://untappd.com/oauth/access_token'
+          :site => 'https://untappd.com',
+          :authorize_url => 'https://untappd.com/oauth/authenticate',
+          :request_token_url => 'https://untappd.com/oauth/request_token',
+          :access_token_url => 'https://untappd.com/oauth/access_token'
       }
 
       uid { raw_info['user']['uid'] }
