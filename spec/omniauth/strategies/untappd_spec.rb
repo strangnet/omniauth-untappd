@@ -16,15 +16,7 @@ describe OmniAuth::Strategies::Untappd do
     end
 
     it 'should have correct authorize url' do
-      expect(subject.options.client_options.authorize_url).to eq 'https://untappd.com/oauth/authenticate'
-    end
-
-    it 'should have correct request token url' do
-      expect(subject.options.client_options.request_token_url).to eq 'https://untappd.com/oauth/request_token'
-    end
-
-    it 'should have correct access token url' do
-      expect(subject.options.client_options.access_token_url).to eq 'https://untappd.com/oauth/access_token'
+      expect(subject.options.client_options.authorize_url).to eq '/oauth/authenticate'
     end
   end
 end

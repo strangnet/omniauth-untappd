@@ -8,9 +8,7 @@ module OmniAuth
 
       option :client_options, {
           :site => 'https://untappd.com',
-          :authorize_url => 'https://untappd.com/oauth/authenticate',
-          :request_token_url => 'https://untappd.com/oauth/request_token',
-          :access_token_url => 'https://untappd.com/oauth/access_token'
+          :authorize_url => '/oauth/authenticate'
       }
 
       uid { raw_info['user']['uid'] }
@@ -31,8 +29,22 @@ module OmniAuth
         { :raw_info => raw_info }
       end
 
+      def request_phase
+        options[:authorize_params] = client_params.merge(options[:authorize_params])
+        super
+      end
+
       def raw_info
         @raw_info ||= MultiJson.decode(access_token.get('/v4/user/info').body)
+      end
+
+      private
+
+      def client_params
+        {
+            :redirect_url => callback_url,
+            :response_type => 'code'
+        }
       end
     end
   end
