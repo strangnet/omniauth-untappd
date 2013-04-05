@@ -22,24 +22,11 @@ Or install it yourself as:
 
 ### Rails
 
-Add code to your `config/initializers/untappd_config.rb`
-
-```ruby
-Untappd.config do |config|
-  config.client_id = <INSERT CLIENT_ID HERE>
-  config.client_secret = <INSERT CLIENT_SECRET HERE>
-  config.redirect_url = <INSERT REDIRECT URL HERE>
-  config.gmt_offset = 1
-end
-```
-
-The config values are used to communicate with Untappd's API.
-
-Add this to `config/initializers/omniauth.rb`
+Add this to or create `config/initializers/omniauth.rb`:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :untappd, CONFIG[:untappd_client_id], CONFIG[:untappd_client_secret]
+  provider :untappd, <INSERT CLIENT_ID HER>, <INSERT CLIENT_SECRET HERE>
 end
 ```
 
