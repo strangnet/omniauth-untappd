@@ -8,15 +8,15 @@ A Omniauth strategy for Untappd
 
 Add this line to your application's `Gemfile`:
 
-  gem 'omniauth-untappd', github: 'strangnet/omniauth-untappd'
+    gem 'omniauth-untappd', github: 'strangnet/omniauth-untappd'
 
 And then execute:
 
-  $ bundle
+    $ bundle
 
 Or install it yourself as:
 
-  $ gem install omniauth-untappd
+    $ gem install omniauth-untappd
 
 ## Usage
 
