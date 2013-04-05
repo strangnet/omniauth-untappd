@@ -72,3 +72,29 @@ module OmniAuth
     end
   end
 end
+
+
+module OAuth2
+  class Client
+    # Initializes an AccessToken by making a request to the token endpoint
+    #
+    # @param [Hash] params a Hash of params for the token endpoint
+    # @param [Hash] access_token_opts, to pass to the AccessToken object
+    # @return [AccessToken] the initalized AccessToken
+    def get_token(params, access_token_opts={})
+      opts = {:raise_errors => options[:raise_errors], :parse => params.delete(:parse)}
+      if options[:token_method] == :post
+        headers = params.delete(:headers)
+        opts[:body] = params
+        opts[:headers] =  {'Content-Type' => 'application/x-www-form-urlencoded'}
+        opts[:headers].merge!(headers) if headers
+      else
+        opts[:params] = params
+      end
+      response = request(options[:token_method], token_url, opts)
+      parsed_response = response.parsed['response']
+      raise Error.new(response) if options[:raise_errors] && !(parsed_response.is_a?(Hash) && parsed_response['access_token'])
+      AccessToken.from_hash(self, parsed_response.merge(access_token_opts))
+    end
+  end
+end
