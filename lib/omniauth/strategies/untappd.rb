@@ -13,16 +13,16 @@ module OmniAuth
           token_method: :get
       }
 
-      uid { raw_info['user']['uid'] }
+      uid { raw_info['uid'] }
 
       info do
         {
-            :id => raw_info['user']['id'],
-            :username => raw_info['user']['user_name'],
-            :name => "#{raw_info['user']['first_name']} #{raw_info['user']['last_name']}",
+            :id => raw_info['id'],
+            :username => raw_info['user_name'],
+            :name => "#{raw_info['first_name']} #{raw_info['last_name']}",
             :urls => {
-                'website' => raw_info['user']['url'],
-                'untappd' => raw_info['user']['untappd_url']
+                'website' => raw_info['url'],
+                'untappd' => raw_info['untappd_url']
             }
         }
       end
@@ -41,14 +41,14 @@ module OmniAuth
         super
       end
 
-      def auth_hash
-        OmniAuth::Utils.deep_merge(super, client_params.merge({:code => 'code'}))
-      end
+      #def auth_hash
+      #  OmniAuth::Utils.deep_merge(super, client_params.merge({:code => 'code'}))
+      #end
 
       def raw_info
         access_token.options[:mode] = :query
-
-        @raw_info ||= MultiJson.decode(access_token.get('http://api.untappd.com/v4/user/info').body)
+        access_token.options[:param_name] = :access_token
+        @raw_info ||= access_token.get('http://api.untappd.com/v4/user/info').parsed['response']['user']
       end
 
       private
